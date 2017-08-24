@@ -24,3 +24,4 @@ hs_err_pid*
 .idea
 .gradle
 .project
+build/android-profile/*
