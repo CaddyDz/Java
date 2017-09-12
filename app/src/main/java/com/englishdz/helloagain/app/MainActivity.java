@@ -1,4 +1,4 @@
-package dz.english.android;
+package com.englishdz.helloagain.app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

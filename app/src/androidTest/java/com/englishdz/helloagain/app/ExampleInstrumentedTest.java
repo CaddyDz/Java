@@ -1,4 +1,4 @@
-package dz.english.android;
+package com.englishdz.helloagain.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("dz.english.android", appContext.getPackageName());
+        assertEquals("com.englishdz.helloagain.app", appContext.getPackageName());
     }
 }

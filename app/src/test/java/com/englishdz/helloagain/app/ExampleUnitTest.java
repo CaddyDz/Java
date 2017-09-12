@@ -1,4 +1,4 @@
-package dz.english.android;
+package com.englishdz.helloagain.app;
 
 import org.junit.Test;
 
