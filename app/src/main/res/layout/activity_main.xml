@@ -6,27 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:gravity="center|top"
     tools:context="com.englishdz.helloagain.app.MainActivity">
 
-
-    <TextView
-        android:text="@string/hello_world"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        />
-
-    <TextView
+        android:text="1st Button"
+        android:textSize="15sp"/>
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Good bye you crazy Android"
-        android:layout_weight="1"
-        />
-    <TextView
+        android:text="2nd Button"
+        android:textSize="15sp"/>
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="More random text"
-        android:layout_weight="1"
-        />
+        android:text="3rd Button"
+        android:textSize="15sp"/>
 
 </LinearLayout>
