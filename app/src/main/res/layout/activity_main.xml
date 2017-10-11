@@ -17,25 +17,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
+            android:id="@+id/answer_yes_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/answer_yes_button"
-            android:hint="Pick me"/>
+            android:hint="Pick me"
+            android:onClick="onYesButtonClick"
+            android:text="@string/answer_yes_button" />
+
         <Button
+            android:id="@+id/answer_no_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/answer_no_button"
-            android:hint="Don't pick me"/>
+            android:hint="Don't pick me"
+            android:onClick="onNoButtonClick"
+            android:text="@string/answer_no_button" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
+            android:id="@+id/users_name_edit_text"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:inputType="textPersonName"
-            android:hint="@string/users_name_edit_text"/>
+            android:hint="@string/users_name_edit_text"
+            android:inputType="textPersonName" />
     </LinearLayout>
 </LinearLayout>
