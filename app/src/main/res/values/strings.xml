@@ -2,4 +2,8 @@
     <string name="app_name">Hello Again</string>
     <string name="hello_world">Hello Again</string>
     <string name="button_1_text">You clicked</string>
+    <string name="users_name_edit_text">Your Name</string>
+    <string name="happy_question">Are you happy?</string>
+    <string name="answer_yes_button">Yes</string>
+    <string name="answer_no_button">No</string>
 </resources>
