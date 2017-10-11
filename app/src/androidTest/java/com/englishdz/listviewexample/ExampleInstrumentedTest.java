@@ -1,4 +1,4 @@
-package com.englishdz.helloagain.app;
+package com.englishdz.listviewexample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.englishdz.helloagain.app", appContext.getPackageName());
+        assertEquals("com.englishdz.listviewexample", appContext.getPackageName());
     }
 }
