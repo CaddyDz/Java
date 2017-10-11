@@ -5,12 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:gravity="center|top"
     tools:context="com.englishdz.helloagain.app.MainActivity">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="1st Button"
         android:textSize="15sp"/>
@@ -18,11 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2nd Button"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3rd Button"
         android:textSize="15sp"/>
-
 </LinearLayout>
