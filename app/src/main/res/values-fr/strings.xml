@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Bonjour Encore</string>
+    <string name="hello_world">Bonjour Encore</string>
+    <string name="button_1_text">Vous avez clické</string>
+    <string name="users_name_edit_text">Vous Nom</string>
+    <string name="happy_question">Es-tu heureux?</string>
+    <string name="answer_yes_button">Oui</string>
+    <string name="answer_no_button">Non</string>
+</resources>
