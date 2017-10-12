@@ -8,12 +8,12 @@
     tools:context="com.englishdz.listviewexample.MainActivity"
     android:orientation="vertical">
 
-    <ListView
+    <android.support.v7.widget.ListViewCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/theListView">
 
-    </ListView>
+    </android.support.v7.widget.ListViewCompat>
 
 
 
