@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         String[] favoriteYTChannels = {"Thomas Frank", "Poly Matter", "exurb1a", "Domics", "The School of life", "Veritasium", "Crash Course", "Kurzgesagt", "Smarter Every Day", "Rationality Rules", "Cosmic Skeptic", "College Humor", "DarkMatter2525", "Vsauce", "CGP Grey"};
 
         // Create List adapter by the array adapter of the created array of values.
-        ListAdapter theAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, favoriteYTChannels);
+        ListAdapter theAdapter = new ArrayAdapter<String>(this, R.layout.row_layout, R.id.textView1, favoriteYTChannels);
 
         // Create a list view out of the UI component
         ListViewCompat theListView = (ListViewCompat) findViewById(R.id.theListView);
