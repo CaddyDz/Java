@@ -1,15 +1,14 @@
 package com.englishdz.listviewexample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ListViewCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         ListAdapter theAdapter = new MyAdapter(this, favoriteYTChannels);
 
         // Create a list view out of the UI component
-        ListViewCompat theListView = (ListViewCompat) findViewById(R.id.theListView);
+        ListView theListView = (ListView) findViewById(R.id.theListView);
 
         // Populate the list view with the list adapter
         theListView.setAdapter(theAdapter);
