@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ListViewExample</string>
+    <string name="app_name">MenuExamples</string>
+    <string name="action_settings">Settings</string>
 </resources>
