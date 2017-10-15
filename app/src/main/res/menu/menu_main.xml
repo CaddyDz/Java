@@ -2,8 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.englishdz.menuexamples.MainActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/action_settings"
+            android:title="@string/action_settings"
+            android:orderInCategory="100"
+            app:showAsAction="never"
+            android:icon="@drawable/settings"/>
+
+        <item android:id="@+id/exit_the_app"
+            android:title="@string/exit_button_text"
+            app:showAsAction="ifRoom|withText"
+            android:orderInCategory="101"
+            android:icon="@drawable/exit"/>
+    </group>
 </menu>

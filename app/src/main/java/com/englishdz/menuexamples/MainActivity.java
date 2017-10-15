@@ -1,5 +1,6 @@
 package com.englishdz.menuexamples;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            DialogFragment myFragment = new MyDialogFragment();
+
+            myFragment.show(getFragmentManager(), "theDialog");
+            return true;
+        } else if (id == R.id.exit_the_app) {
+            finish();
             return true;
         }
 
