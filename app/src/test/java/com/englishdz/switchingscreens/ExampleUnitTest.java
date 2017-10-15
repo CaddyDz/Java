@@ -1,4 +1,4 @@
-package com.englishdz.menuexamples;
+package com.englishdz.switchingscreens;
 
 import org.junit.Test;
 
