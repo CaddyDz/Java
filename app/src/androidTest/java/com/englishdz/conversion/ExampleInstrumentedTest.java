@@ -1,4 +1,4 @@
-package com.englishdz.switchingscreens;
+package com.englishdz.conversion;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.englishdz.switchingscreens", appContext.getPackageName());
+        assertEquals("com.englishdz.conversion", appContext.getPackageName());
     }
 }

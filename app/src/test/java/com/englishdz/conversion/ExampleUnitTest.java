@@ -1,4 +1,4 @@
-package com.englishdz.switchingscreens;
+package com.englishdz.conversion;
 
 import org.junit.Test;
 
