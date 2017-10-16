@@ -17,13 +17,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGetNameClick(View view) {
-        Intent getNameScreenIntent = new Intent(this, SecondScreen.class);
+
+        Human caddy = new Human(1.82, 66, "Caddy");
+
+        Intent caddyIntent = new Intent(this, SecondScreen.class);
+
+        caddyIntent.putExtra("humanCaddy", caddy);
 
         final int result = 1;
 
-        getNameScreenIntent.putExtra("callingActivity", "MainActivity");
-
-        startActivityForResult(getNameScreenIntent, result);
+        startActivityForResult(caddyIntent, result);
 
     }
 
