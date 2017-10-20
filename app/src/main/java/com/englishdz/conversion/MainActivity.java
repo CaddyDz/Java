@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String itemSelected = adapterView.getItemAtPosition(position).toString();
-                checkIfConvertingFromTsp(itemSelected);
+                // checkIfConvertingFromTsp(itemSelected);
             }
 
             @Override
