@@ -1,4 +1,4 @@
-package com.englishdz.stylishtheme;
+package com.englishdz.salim.androidfragments;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.englishdz.stylishtheme", appContext.getPackageName());
+        assertEquals("com.englishdz.salim.androidfragments", appContext.getPackageName());
     }
 }

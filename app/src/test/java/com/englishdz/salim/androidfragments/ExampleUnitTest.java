@@ -1,4 +1,4 @@
-package com.englishdz.stylishtheme;
+package com.englishdz.salim.androidfragments;
 
 import org.junit.Test;
 
