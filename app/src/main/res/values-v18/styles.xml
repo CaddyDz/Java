@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Android API 18+ -->
+
+        <item name="android:windowBackground">#ffedeba6</item>
+
+        <!-- http://developer.android.com/reference/android/R.styleable.html#Theme
+        Provides a list of attributes you can override -->
+
+        <!-- You can change the text color in all widgets across the whole app -->
+        <item name="android:editTextColor">#ffb62a23</item>
+        <item name="android:textColorPrimary">#ffb62a23</item>
+        <item name="android:textColorSecondary">#ffb62a23</item>
+        <item name="android:textColorTertiary">#ffb62a23</item>
+        <item name="android:textColorPrimaryInverse">#ffb62a23</item>
+        <item name="android:textColorSecondaryInverse">#ffb62a23</item>
+        <item name="android:textColorTertiaryInverse">#ffb62a23</item>
+
+        <!-- Change the font family with API 16+
+        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif-thin" -->
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextView1">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EditText" parent="@style/TextView1">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextView1.TextView2">
+        <item name="android:padding">30dp</item>
+    </style>
+
+    <style name="TextView1.TextView2.TextView3">
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+    
+    <style name="TextView" parent="@android:style/Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">55sp</item>
+    </style>
+
+</resources>
