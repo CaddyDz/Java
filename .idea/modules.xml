@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidFragments.iml" filepath="$PROJECT_DIR$/AndroidFragments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MultipaneFragment.iml" filepath="$PROJECT_DIR$/MultipaneFragment.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

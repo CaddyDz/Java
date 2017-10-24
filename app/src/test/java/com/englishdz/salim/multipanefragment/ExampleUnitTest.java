@@ -1,4 +1,4 @@
-package com.englishdz.salim.androidfragments;
+package com.englishdz.salim.multipanefragment;
 
 import org.junit.Test;
 
