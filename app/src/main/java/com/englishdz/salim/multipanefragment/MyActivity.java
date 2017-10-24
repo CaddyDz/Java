@@ -16,9 +16,7 @@ public class MyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-
         int screenOrientation = getResources().getConfiguration().orientation;
-
         if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) {
             hideSidePanel();
         }
