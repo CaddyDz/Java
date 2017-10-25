@@ -1,4 +1,4 @@
-package com.englishdz.salim.fragmentlayouts;
+package com.englishdz.salim.translation;
 
 import org.junit.Test;
 
