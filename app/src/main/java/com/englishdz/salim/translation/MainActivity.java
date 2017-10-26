@@ -17,12 +17,17 @@ import org.apache.http.params.BasicHttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 
 public class MainActivity extends Activity {
 
@@ -43,7 +48,7 @@ public class MainActivity extends Activity {
             Toast.makeText(this, "Getting Translations", Toast.LENGTH_LONG).show();
 
             // Calls for the method doInBackground to execute
-            new SaveTheFeed().execute();
+            new GetXMLData().execute();
         } else {
             // Post an error message if they didn't enter words
             Toast.makeText(this, "Enter Words to Translate", Toast.LENGTH_SHORT).show();
@@ -60,37 +65,37 @@ public class MainActivity extends Activity {
 
     // Allows you to perform background operations without locking up the user interface until they are finished
     // The void part is stating that it doesn't receive parameters, it doesn't monitor progress, and it won't pass a result to onPostExecute
-    class SaveTheFeed extends AsyncTask<Void, Void, Void> {
+    class GetXMLData extends AsyncTask<Void, Void, Void> {
 
-        // Holds JSON data in String format
-        String jsonString = "";
-
-        // Will hold the translations that will be displayed on the screen
-        String result = "";
-
-        // Everything that should execute in the background goes here
-        // The UI is not editable here
+        // Will hold the final string to display
+        String stringToPrint = "";
 
         @Override
         protected Void doInBackground(Void... params) {
 
-            // Get access to the EditText so we can get the text in it
+            // Holds the xml String that is retrieved from the web service
+            String xmlString;
+
+            // Holds the words the user wants to translate
+            String wordsToTranslate = "";
+
+            // Where the user enters the words to translate
             EditText translateEditText = (EditText) findViewById(R.id.editText);
 
-            // Get the text from EditText
-            String wordsToTranslate = translateEditText.getText().toString();
+            // Get the words the user entered in the EditText box
+            wordsToTranslate = translateEditText.getText().toString();
 
-            // Replace spaces in the String that was entered with + so they can be passed in a URL
+            // Replace spaces with plus so they can be passed in the URL to the web service
             wordsToTranslate = wordsToTranslate.replace(" ", "+");
 
             // Client used to grab data from a provided URL
             DefaultHttpClient httpClient = new DefaultHttpClient(new BasicHttpParams());
 
             // Provide the URL for the post request
-            HttpPost httpPost = new HttpPost("http://newjustin.com/translateit.php?action=translations&english_words=" + wordsToTranslate);
+            HttpPost httpPost = new HttpPost("http://newjustin.com/translateit.php?action=xmltranslations&english_words=" + wordsToTranslate);
 
-            // Define that the data expected is in JSON format
-            httpPost.setHeader("Content-type", "application/json");
+            // Define that the data expected is in XML format
+            httpPost.setHeader("Content-type", "application/xml");
 
             // Allows you to input a stream of bytes from the URL
             InputStream inputStream = null;
@@ -107,7 +112,7 @@ public class MainActivity extends Activity {
 
                 // A BufferReader is used because it is efficient
                 // The InputStreamReader converts the bytes into characters
-                // My JSON data is UTF-8 so I read that encoding
+                    // My XML data is UTF-8 so I read that encoding
                 // 8 defines the input buffer size
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
 
@@ -124,49 +129,58 @@ public class MainActivity extends Activity {
                 }
 
                 // Save the results in a String
-                jsonString = sb.toString();
+                xmlString = sb.toString();
 
-                // Create a JSONObject by passing the JSON data
-                JSONObject jObject = new JSONObject(jsonString);
+                // Generates an XML parser
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
 
-                // Get the Array named translations that contains all the translations
-                JSONArray jArray = jObject.getJSONArray("translations");
+                // The XML parser that is generated will support XML namespaces
+                factory.setNamespaceAware(true);
 
-                // Cycles through every translation in the array
-                outputTranslations(jArray);
+                // Gathers XML data and provides information on that data
+                XmlPullParser xpp = factory.newPullParser();
+
+                // Input the XML data for parsing
+                xpp.setInput(new StringReader(xmlString));
+
+                // The event type is either START_DOCUMENT, END_DOCUMENT, START_TAG, END_TAG, TEXT
+                int eventType = xpp.getEventType();
+
+                // Cycle through the XML document until the document ends
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+
+                    // Each time you find a new opening tag, the event type will be START_TAG and we want ti skip the first tag with the name "translations"
+                    if ((eventType == XmlPullParser.START_TAG) && (!xpp.getName().equals("translations"))) {
+
+                        // getName returns the name for the current element with focus
+                        stringToPrint = stringToPrint + xpp.getName() + " : ";
+                    } else if (eventType == XmlPullParser.TEXT) {
+                        stringToPrint = stringToPrint + xpp.getText() + "\n";
+                    }
+                    // next puts focus on the next element in the XML doc
+                    eventType = xpp.next();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ClientProtocolException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (XmlPullParserException e) {
+              e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
         }
 
-        // Called after doInBackground finishes executing
         @Override
         protected void onPostExecute(Void aVoid) {
 
-            // Put the translations in the TextView
-            TextView translationTextView = (TextView) findViewById(R.id.translationTextView);
+            TextView translateTextView = (TextView) findViewById(R.id.translationTextView);
 
-            translationTextView.setText(result);
-        }
+            translateTextView.setText(stringToPrint);
 
-        protected void outputTranslations(JSONArray jsonArray) {
-            // Used to get the translation using a key
-            String[] languages = {"arabic", "chinese", "danish", "dutch", "french", "german", "italian", "portuguese", "russian", "spanish"};
-
-            // Save all the translations by getting them with the key
-            try {
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject translationObject = jsonArray.getJSONObject(i);
-                    result = result + languages[i] + " : " + translationObject.getString(languages[i]) + "\n";
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
     }
 
