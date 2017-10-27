@@ -1,4 +1,4 @@
-package com.englishdz.salim.translation;
+package com.englishdz.salim.savingstate;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.englishdz.salim.translation", appContext.getPackageName());
+        assertEquals("com.englishdz.salim.savingstate", appContext.getPackageName());
     }
 }
