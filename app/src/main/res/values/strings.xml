@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">SavingState</string>
+    <string name="app_name">ServiceEx</string>
     <string name="action_settings">Settings</string>
-    <string name="notesTextView">Notes</string>
-    <string name="notesEditText">Enter Notes</string>
 </resources>

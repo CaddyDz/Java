@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.englishdz.salim.savingstate">
+          package="com.englishdz.salim.serviceex">
+
+    <!-- We need permission to access the internet -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -19,10 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="something" >
-        </activity>
+
+        <!-- Declare the service -->
+        <service android:name=".FileService"
+                 android:exported="false"/>
     </application>
 
 </manifest>
