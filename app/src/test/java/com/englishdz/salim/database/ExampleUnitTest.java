@@ -1,4 +1,4 @@
-package com.englishdz.salim.notifications;
+package com.englishdz.salim.database;
 
 import org.junit.Test;
 

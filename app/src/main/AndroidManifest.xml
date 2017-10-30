@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.englishdz.salim.notifications">
-
-    <!-- Permission to use AlarmManager -->
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
-    <!-- Permission to Send SMS -->
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+          package="com.englishdz.salim.database">
 
     <application
         android:allowBackup="true"
@@ -24,15 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MoreInfoNotification"
-                  android:label="More on notification"
-                  android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
-
-        <receiver android:name=".AlertReceiver"/>
     </application>
 
 </manifest>
