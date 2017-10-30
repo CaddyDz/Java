@@ -1,4 +1,4 @@
-package com.englishdz.salim.serviceex;
+package com.englishdz.salim.notifications;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.englishdz.salim.serviceex", appContext.getPackageName());
+        assertEquals("com.englishdz.salim.notifications", appContext.getPackageName());
     }
 }

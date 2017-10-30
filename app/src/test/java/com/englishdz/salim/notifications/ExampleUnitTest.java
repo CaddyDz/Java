@@ -1,4 +1,4 @@
-package com.englishdz.salim.serviceex;
+package com.englishdz.salim.notifications;
 
 import org.junit.Test;
 
