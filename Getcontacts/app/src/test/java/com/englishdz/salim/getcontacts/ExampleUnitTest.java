@@ -1,4 +1,4 @@
-package com.englishdz.salim.database;
+package com.englishdz.salim.getcontacts;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.englishdz.salim.contentprovider">
+          package="com.englishdz.salim.getcontacts">
 
     <application
         android:allowBackup="true"
@@ -19,13 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <!-- The Content Provider is declared -->
-        <provider
-            android:authorities="com.englishdz.salim.contentprovider.ContactProvider"
-            android:name=".ContactProvider"
-            android:exported="true"
-            android:multiprocess="true"/>
     </application>
 
 </manifest>
