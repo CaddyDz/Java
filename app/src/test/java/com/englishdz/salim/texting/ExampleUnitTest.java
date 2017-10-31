@@ -1,4 +1,4 @@
-package com.englishdz.salim.getcontacts;
+package com.englishdz.salim.texting;
 
 import org.junit.Test;
 
