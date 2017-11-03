@@ -1,4 +1,17 @@
 <resources>
-    <string name="app_name">Mappy</string>
+    <string name="app_name">Conversion</string>
     <string name="action_settings">Settings</string>
+    <string name="convert_from_text">Convert From</string>
+    <string name="tsp_unit_text">1.0</string>
+    <string name="cup_unit_text">1.0</string>
+    <string name="tbs_unit_text">1.0</string>
+    <string name="oz_unit_text">1.0</string>
+    <string name="kg_unit_text">1.0</string>
+    <string name="pd_unit_text">1.0</string>
+    <string name="qt_unit_text">1.0</string>
+    <string name="gl_unit_text">1.0</string>
+    <string name="ml_unit_text">1.0</string>
+    <string name="lt_unit_text">1.0</string>
+    <string name="mg_unit_text">1.0</string>
+    <string name="pt_unit_text">1.0</string>
 </resources>
