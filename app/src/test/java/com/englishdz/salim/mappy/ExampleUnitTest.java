@@ -1,4 +1,4 @@
-package com.englishdz.conversion;
+package com.englishdz.salim.mappy;
 
 import org.junit.Test;
 
