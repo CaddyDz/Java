@@ -1,63 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="400dp"/>
+        android:layout_height="match_parent"/>
 
-    <EditText
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:ems="10"
-        android:id="@+id/addressEditText"
-        android:layout_below="@+id/map"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:hint="Start Address / Marker"/>
-
-    <Button
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:text="Marker"
-        android:id="@+id/getAddressButton"
-        android:layout_alignBottom="@+id/addressEditText"
-        android:layout_toRightOf="@+id/addressEditText"
-        android:layout_toEndOf="@+id/addressEditText"
-        android:layout_marginRight="10dp"
-        android:onClick="showAddressMarker"/>
-
-    <EditText
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:ems="10"
-        android:id="@+id/finalAddressEditText"
-        android:layout_below="@+id/addressEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:hint="Destination Address"/>
-
-    <Button
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Directions"
-        android:id="@+id/getDirectionsButton"
-        android:layout_alignBottom="@+id/finalAddressEditText"
-        android:layout_toRightOf="@+id/finalAddressEditText"
-        android:layout_toEndOf="@+id/finalAddressEditText"
-        android:layout_marginRight="10dp"
-        android:onClick="getDirections"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"/>
 
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>
