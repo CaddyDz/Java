@@ -1,4 +1,4 @@
-package com.salim.androidtabs;
+package com.salim.slidingtabs;
 
 import org.junit.Test;
 
