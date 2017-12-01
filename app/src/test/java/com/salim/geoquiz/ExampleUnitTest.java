@@ -1,4 +1,4 @@
-package com.salim.slidingtabs;
+package com.salim.geoquiz;
 
 import org.junit.Test;
 
