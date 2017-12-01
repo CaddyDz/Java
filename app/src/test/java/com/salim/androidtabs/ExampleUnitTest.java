@@ -1,4 +1,4 @@
-package com.salim.navdrawex;
+package com.salim.androidtabs;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.salim.navdrawex;
+package com.salim.androidtabs;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.salim.navdrawex", appContext.getPackageName());
+        assertEquals("com.salim.androidtabs", appContext.getPackageName());
     }
 }
