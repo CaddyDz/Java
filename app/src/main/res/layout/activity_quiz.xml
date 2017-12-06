@@ -17,38 +17,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/true_button"/>
+
         <Button
             android:id="@+id/false_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/false_button"/>
+
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/cheat_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="bottom|center"
+        android:text="@string/cheat_button"/>
 
-        <ImageButton
-            android:id="@+id/prev_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_left"
-            android:contentDescription="Previous question"/>
-
-        <ImageButton
-            android:id="@+id/next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/arrow_right"
-            android:contentDescription="Next question"/>
-
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_button"
+        android:drawableRight="@mipmap/arrow_right"
+        android:drawablePadding="4dp"/>
 
 </LinearLayout>
