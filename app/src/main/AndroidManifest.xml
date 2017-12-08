@@ -21,8 +21,7 @@
         </activity>
         <activity
             android:name=".CheatActivity"
-            android:label="@string/title_activity_cheat"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_cheat">
         </activity>
     </application>
 
