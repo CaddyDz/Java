@@ -1,4 +1,4 @@
-package com.salim.geoquiz;
+package com.bignerdranch.android.criminalintent;
 
 import org.junit.Test;
 
