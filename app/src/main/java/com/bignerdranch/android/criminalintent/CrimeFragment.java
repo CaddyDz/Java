@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -52,7 +51,7 @@ public class CrimeFragment extends Fragment {
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Toast.makeText(getActivity(), "Wow", Toast.LENGTH_SHORT).show();
+                // Intentionally left blank
             }
 
             @Override
