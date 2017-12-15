@@ -14,6 +14,8 @@
         android:id="@+id/crime_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:hint="@string/crime_title_hint"/>
 
     <TextView
@@ -23,9 +25,9 @@
         style="?android:listSeparatorTextViewStyle"/>
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp">
 
@@ -37,11 +39,10 @@
 
         <CheckBox
             android:id="@+id/crime_solved"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/crime_solved_label"/>
-
+            android:text="@string/crime_solved_label"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </LinearLayout>

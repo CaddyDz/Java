@@ -11,17 +11,12 @@ public class Crime {
     private boolean mSolved;
 
     public Crime() {
-        // Generate unique identifier
         mId = UUID.randomUUID();
         mDate = new Date();
     }
 
     public UUID getId() {
         return mId;
-    }
-
-    public void setId(UUID id) {
-        mId = id;
     }
 
     public String getTitle() {

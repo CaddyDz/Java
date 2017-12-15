@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class CrimeLab {
+
     private static CrimeLab sCrimeLab;
 
-    private List<Crime> mCrimes;
+    private ArrayList<Crime> mCrimes;
 
     public static CrimeLab get(Context context) {
         if (sCrimeLab == null) {
@@ -20,10 +21,10 @@ public class CrimeLab {
 
     private CrimeLab(Context context) {
         mCrimes = new ArrayList<>();
-        for (int c = 0; c < 100; c++) {
+        for (int i = 0; i < 100; i++) {
             Crime crime = new Crime();
-            crime.setTitle("Crime #" + c);
-            crime.setSolved(c % 2 == 0); // Every other one
+            crime.setTitle("Crime #" + i);
+            crime.setSolved(i % 2 == 0);
             mCrimes.add(crime);
         }
     }
