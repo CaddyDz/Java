@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -161,6 +162,7 @@ public class CrimeFragment extends Fragment {
             }
         });
         mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
+        upDatePhotoView();
 
         return v;
     }
@@ -200,6 +202,15 @@ public class CrimeFragment extends Fragment {
         return report;
     }
 
+    private void upDatePhotoView() {
+        if (mPhotoFile == null || !mPhotoFile.exists()) {
+            mPhotoView.setImageDrawable(null);
+        } else {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            mPhotoView.setImageBitmap(bitmap);
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
@@ -231,6 +242,8 @@ public class CrimeFragment extends Fragment {
             } finally {
                 c.close();
             }
+        } else if (requestCode == REQUEST_PHOTO) {
+            upDatePhotoView();
         }
     }
 }
