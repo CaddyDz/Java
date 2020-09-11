@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "749118334366",
+    "firebase_url": "https://firetool-251c5.firebaseio.com",
+    "project_id": "firetool-251c5",
+    "storage_bucket": "firetool-251c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749118334366:android:e4161ea833a8462a20e28f",
+        "android_client_info": {
+          "package_name": "com.marsool.firetool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749118334366-0v949htu702vo07jaklggc02ft4o3t52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnIW5FBQMrd0iKN154cMR54imkXQ9RQM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749118334366-0v949htu702vo07jaklggc02ft4o3t52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
