@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Fire Tool</string>
+    <string name="app_slogon">Work quickly and easily</string>
+    <string name="logo_description">App Main Logo</string>
+    <string name="submit">Submit</string>
 </resources>

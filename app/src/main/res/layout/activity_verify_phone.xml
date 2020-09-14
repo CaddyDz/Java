@@ -47,7 +47,7 @@
             android:digits="+0000123456789"
             android:drawablePadding="10dp"
             android:textSize="20dp"
-            android:background="@drawable/cadre"
+            android:background="@drawable/cadre_bottom"
             android:hint="     كود التفعيل    "
             android:gravity="right"
             android:padding="20dp"

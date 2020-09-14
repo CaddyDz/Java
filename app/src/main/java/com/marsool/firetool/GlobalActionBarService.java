@@ -214,8 +214,6 @@ public class GlobalActionBarService extends AccessibilityService {
                                 }
                             }
                         }
-
-
                     }
                 }
             }

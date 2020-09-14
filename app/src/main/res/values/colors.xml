@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#ac0404</color>
     <color name="colorAccent">#ac0404</color>
     <color name="red">#ac0404</color>
+    <color name="accent">@color/red</color>
+    <color name="input_back">#88dddddd</color>
 </resources>

@@ -18,6 +18,7 @@ public class Contact extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact);
+        
         ImageButton facebook=(ImageButton) findViewById(R.id.facebook);
         ImageButton what=(ImageButton) findViewById(R.id.whatsapp);
         facebook.setOnClickListener(new View.OnClickListener() {
