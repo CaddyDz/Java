@@ -46,6 +46,10 @@ public class SharedPrefManager {
     }
 
     //this method will give the logged in user
+    public String getToken() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_TOKEN, null);
+    }
 
     //this method will logout the user
     public static void logout() {
@@ -54,6 +58,5 @@ public class SharedPrefManager {
         editor.clear();
         editor.apply();
         mCtx.startActivity(new Intent(mCtx, MainActivity.class));
-
     }
 }

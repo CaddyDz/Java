@@ -10,6 +10,7 @@ public class ApiCall extends AsyncTask<Void, HttpResponse, HttpResponse> {
     private boolean disclosed = false;
 
     private String baseUrl;
+    private HashMap<String, String> header;
     private HashMap<String, String> params;
     private Handler handler;
 
@@ -19,7 +20,16 @@ public class ApiCall extends AsyncTask<Void, HttpResponse, HttpResponse> {
         for (Param p : prms) {
             params.put(p.getKey(), p.getValue());
         }
+        header = new HashMap<String, String>();
         this.handler = handler;
+    }
+
+    public void addHeader(String key, String value) {
+        header.put(key, value);
+    }
+
+    public HashMap<String, String> getHeader() {
+        return header;
     }
 
     @Override
@@ -37,7 +47,7 @@ public class ApiCall extends AsyncTask<Void, HttpResponse, HttpResponse> {
         observer.start();
         try {
             long start = System.currentTimeMillis();
-            HttpResponse res = new RequestHandler().sendPostRequest(baseUrl, params);
+            HttpResponse res = new RequestHandler().sendPostRequest(baseUrl, header, params);
             long took = System.currentTimeMillis() - start;
             SystemClock.sleep(Math.max(1500 - took,0));
             return res;

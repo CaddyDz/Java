@@ -25,6 +25,8 @@ import com.marsool.firetool.networking.Param;
 import java.net.UnknownHostException;
 
 public class MainActivity extends Activity {
+    private SharedPrefManager spm;
+
     //login views
     private EditText editTextUsername, editTextPassword;
     private Button login;
@@ -38,7 +40,7 @@ public class MainActivity extends Activity {
     private View popupSep;
     private View popupBack;
     private View popupLoading;
-    boolean popupOpen = false;
+    private boolean popupOpen = false;
     private int loadedPopup = -1;
     private int animDur = 300;
     private int popup_size;
@@ -73,8 +75,9 @@ public class MainActivity extends Activity {
         preparePhoneField();
 
         if (isNetworkConnected()) {
+            spm = SharedPrefManager.getInstance(this);
             //check whether the user is logged in
-            if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            if (spm.isLoggedIn()) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
                 startActivity(intent);
                 finish();
@@ -154,12 +157,14 @@ public class MainActivity extends Activity {
                     @Override
                     public void handleResponse(HttpResponse response) {
                         if (response.getCode() == 403) {
-                            showError("You're already logged somewhere else");
+                            showError("You're already logged " + (spm.isLoggedIn() ? "here":"somewhere else"));
                         } else if (response.getCode() == 422) {
                             showError("Incorrect phone and/or password");
                         } else if (response.getCode() == 200) {
-                            SharedPrefManager spm = SharedPrefManager.getInstance(MainActivity.this);
                             spm.storeToken(response.getBody());
+                            Intent intent = new Intent(MainActivity.this, Settings.class);
+                            startActivity(intent);
+                            finish();
                         }
                         loaded();
                     }

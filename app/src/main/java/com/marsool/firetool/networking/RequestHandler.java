@@ -23,12 +23,15 @@ public class RequestHandler {
     //this method will send a post request to the specified url
     //in this app we are using only post request
     //in the hashmap we have the data to be sent to the server in keyvalue pairs
-    public HttpResponse sendPostRequest(String requestURL, HashMap<String, String> postDataParams) throws IOException {
+    public HttpResponse sendPostRequest(String requestURL, HashMap<String, String> header, HashMap<String, String> postDataParams) throws IOException {
         URL url;
         StringBuilder sb = new StringBuilder();
         url = new URL(requestURL);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
+        for (String key : header.keySet()) {
+            conn.setRequestProperty(key, header.get(key));
+        }
         conn.setDoInput(true);
         conn.setDoOutput(true);
 
@@ -50,10 +53,12 @@ public class RequestHandler {
         } else if (responseCode == 403 || responseCode == 422) {
             ris = conn.getErrorStream();
         }
-        BufferedReader br = new BufferedReader(new InputStreamReader(ris));
-        String response;
-        while ((response = br.readLine()) != null) {
-            sb.append(response);
+        if(ris != null) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(ris));
+            String response;
+            while ((response = br.readLine()) != null) {
+                sb.append(response);
+            }
         }
         return new HttpResponse(responseCode, sb.toString());
     }
