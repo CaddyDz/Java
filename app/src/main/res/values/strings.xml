@@ -1,3 +1,10 @@
 <resources>
+    <string name="api_base">https://lukas.sitando.com/api/</string>
     <string name="app_name">Fire Tool</string>
+    <string name="app_slogon">Work quickly and easily</string>
+    <string name="logo_description">App Main Logo</string>
+    <string name="phone_field">Phone Number</string>
+    <string name="password_field">Phone Number</string>
+    <string name="submit">Submit</string>
+    <string name="back">Back</string>
 </resources>

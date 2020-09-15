@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layoutDirection="ltr"
-    android:padding="20dp"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@drawable/background_clear"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -23,7 +23,7 @@
             android:layout_width="248dp"
             android:layout_height="343dp"
             android:layout_centerInParent="true"
-            android:background="@drawable/main"
+            android:background="@drawable/ic_main"
             android:paddingRight="20dp" />
 
     </RelativeLayout>
@@ -33,10 +33,9 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_below="@id/imageView"
+        android:layout_weight="1"
         android:orientation="vertical">
-
 
 
         <EditText
@@ -44,15 +43,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/cadre"
             android:digits="+0000123456789"
             android:drawablePadding="10dp"
-            android:textSize="20dp"
-            android:background="@drawable/cadre"
-            android:hint="     كود التفعيل    "
             android:gravity="right"
-            android:padding="20dp"
+            android:hint="     كود التفعيل    "
             android:inputType="phone"
-            android:maxLength="13" />
+            android:maxLength="13"
+            android:padding="20dp"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonSignIn"
@@ -60,12 +59,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextCode"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/button"
-            android:textSize="15dp"
             android:text="     تسجيل الدخول     "
             android:textAllCaps="false"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:textSize="15dp" />
 
     </RelativeLayout>
 
