@@ -8,11 +8,8 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,26 +18,23 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import androidx.annotation.RequiresApi;
+
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.RequiresApi;
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
-
-import static android.content.ContentValues.TAG;
 import static com.marsool.firetool.Settings.st;
-
 
 public class GlobalActionBarService extends AccessibilityService {
     private static final String TAG = GlobalActionBarService.class
             .getSimpleName();
-    boolean a,b,c,d,hope=true, please=true;
-    public static boolean on=false;
+    boolean a, b, c, d, hope = true, please = true;
+    public static boolean on = false;
     private FrameLayout mLayout;
 
     @Override
     protected boolean onGesture(int gestureId) {
-        if(gestureId == GLOBAL_ACTION_BACK) {
+        if (gestureId == GLOBAL_ACTION_BACK) {
             Log.d(TAG, "Gesture Home Pressed");
         }
         return super.onGesture(gestureId);
@@ -56,7 +50,7 @@ public class GlobalActionBarService extends AccessibilityService {
         info.notificationTimeout = 100;
         info.feedbackType = AccessibilityServiceInfo.FEEDBACK_ALL_MASK;
         this.setServiceInfo(info);
-        on=true;
+        on = true;
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         mLayout = new FrameLayout(this);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -76,19 +70,19 @@ public class GlobalActionBarService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         setServiceInfo();
-        if(st){
+        if (st) {
             event.getSource();
-            if(event.getSource()!=null){
-                if(a&&hope){
+            if (event.getSource() != null) {
+                if (a && hope) {
                     AccessibilityNodeInfo nodeInfo = event.getSource();
                     if (nodeInfo == null) {
                         return;
                     }
-                        // We can find button using button name or button id
+                    // We can find button using button name or button id
                     List<AccessibilityNodeInfo> list = nodeInfo
                             .findAccessibilityNodeInfosByText("التوصيل");
-                    if(!list.isEmpty()){
-                        list= Collections.singletonList(list.get(0));
+                    if (!list.isEmpty()) {
+                        list = Collections.singletonList(list.get(0));
                     }
                     for (AccessibilityNodeInfo node : list) {
                         configureSwipeButton();
@@ -96,10 +90,10 @@ public class GlobalActionBarService extends AccessibilityService {
 
                     }
 
-                        Log.i(TAG, "ACC::onAccessibilityEvent: nodeInfo=" + event.getEventType());
+                    Log.i(TAG, "ACC::onAccessibilityEvent: nodeInfo=" + event.getEventType());
                 }
 
-                if(b&&please){
+                if (b && please) {
                     if (event.getSource() != null) {
                         if (event.getPackageName().equals("com.mrsool")) {
                             AccessibilityNodeInfo nodeInfo = event.getSource();
@@ -114,7 +108,7 @@ public class GlobalActionBarService extends AccessibilityService {
                                         .findAccessibilityNodeInfosByText("أنا مستعد أوصل هذا الطلب");
 
                                 for (AccessibilityNodeInfo node : list) {
-                                    AccessibilityNodeInfo parent= node.getParent();
+                                    AccessibilityNodeInfo parent = node.getParent();
                                     try {
                                         Thread.sleep(100);
                                     } catch (InterruptedException e) {
@@ -126,7 +120,7 @@ public class GlobalActionBarService extends AccessibilityService {
 
                                 list = nodeInfo.findAccessibilityNodeInfosByViewId("أنا مستعد أوصل هذا الطلب");
                                 for (AccessibilityNodeInfo node : list) {
-                                    AccessibilityNodeInfo parent= node.getParent();
+                                    AccessibilityNodeInfo parent = node.getParent();
                                     parent.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                                 }
 
@@ -135,7 +129,7 @@ public class GlobalActionBarService extends AccessibilityService {
                     }
                 }
 
-                if(c){
+                if (c) {
                     AccessibilityNodeInfo source = event.getSource();
                     if (source == null) {
                         return;
@@ -151,19 +145,19 @@ public class GlobalActionBarService extends AccessibilityService {
                         if (nodeInf == null) {
                             return;
                         }
-                            List<AccessibilityNodeInfo> lis = nodeInf
-                                    .findAccessibilityNodeInfosByViewId("com.mrsool:id/edCost");
-                            for (AccessibilityNodeInfo node : lis) {
-                                Log.i(TAG, "ACC::onAccessibilityEvent: edCost " + node);
-                                node.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                            }
+                        List<AccessibilityNodeInfo> lis = nodeInf
+                                .findAccessibilityNodeInfosByViewId("com.mrsool:id/edCost");
+                        for (AccessibilityNodeInfo node : lis) {
+                            Log.i(TAG, "ACC::onAccessibilityEvent: edCost " + node);
+                            node.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        }
 
-                            lis = nodeInf
-                                    .findAccessibilityNodeInfosByViewId("com.mrsool:id/edCost");
-                            for (AccessibilityNodeInfo node : lis) {
-                                Log.i(TAG, "ACC::onAccessibilityEvent: edCost " + node);
-                                node.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                            }
+                        lis = nodeInf
+                                .findAccessibilityNodeInfosByViewId("com.mrsool:id/edCost");
+                        for (AccessibilityNodeInfo node : lis) {
+                            Log.i(TAG, "ACC::onAccessibilityEvent: edCost " + node);
+                            node.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        }
                         Bundle bundle = new Bundle();
                         String firstInt = requiredText.replaceFirst(".*?(\\d+).*", "$1");
                         bundle.putCharSequence(parent.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, firstInt);
@@ -175,8 +169,8 @@ public class GlobalActionBarService extends AccessibilityService {
                         if (nodeInfo2 == null) {
                             return;
                         }
-                        if(!d){
-                            if (isNumeric(parent.getText().toString())){
+                        if (!d) {
+                            if (isNumeric(parent.getText().toString())) {
                                 try {
                                     Thread.sleep(5000);
                                 } catch (InterruptedException e) {
@@ -185,8 +179,8 @@ public class GlobalActionBarService extends AccessibilityService {
                                 }
                             }
                         }
-                        if(d){
-                            if (isNumeric(parent.getText().toString())){
+                        if (d) {
+                            if (isNumeric(parent.getText().toString())) {
                                 List<AccessibilityNodeInfo> list2 = nodeInfo2
                                         .findAccessibilityNodeInfosByViewId("com.mrsool:id/llSend");
                                 for (AccessibilityNodeInfo node : list2) {
@@ -220,13 +214,13 @@ public class GlobalActionBarService extends AccessibilityService {
         }
 
 
-
     }
 
     @Override
     public void onInterrupt() {
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void configureSwipeButton() {
         Path swipePath = new Path();
@@ -237,24 +231,27 @@ public class GlobalActionBarService extends AccessibilityService {
         dispatchGesture(gestureBuilder.build(), null, null);
 
     }
+
     private void stop() {
         Button swipeButton = (Button) mLayout.findViewById(R.id.swipe);
         swipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hope=!hope;
-                Log.i(TAG,String.valueOf(hope));
+                hope = !hope;
+                Log.i(TAG, String.valueOf(hope));
             }
         });
     }
+
     public boolean isNumeric(String s) {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
-    public void setServiceInfo(){
+
+    public void setServiceInfo() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        a= pref.getBoolean("a", true);
-        b= pref.getBoolean("b", true);
-        c= pref.getBoolean("c", true);
-        d= pref.getBoolean("d", true);
+        a = pref.getBoolean("a", true);
+        b = pref.getBoolean("b", true);
+        c = pref.getBoolean("c", true);
+        d = pref.getBoolean("d", true);
     }
 }

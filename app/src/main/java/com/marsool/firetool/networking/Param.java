@@ -1,4 +1,4 @@
-package com.marsool.firetool.utils.networking;
+package com.marsool.firetool.networking;
 
 public class Param {
     private String key,value;

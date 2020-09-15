@@ -1,8 +1,9 @@
-package com.marsool.firetool.utils.networking;
+package com.marsool.firetool.networking;
 
 import android.os.AsyncTask;
 import android.os.SystemClock;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 public class ApiCall extends AsyncTask<Void, HttpResponse, HttpResponse> {
@@ -29,10 +30,11 @@ public class ApiCall extends AsyncTask<Void, HttpResponse, HttpResponse> {
                 SystemClock.sleep(8000);
                 if (!disclosed) {
                     disclosed = true;
-                    handler.handleError("Connection timed out!");
+                    handler.handleError(new UnknownHostException());
                 }
             }
         };
+        observer.start();
         try {
             long start = System.currentTimeMillis();
             HttpResponse res = new RequestHandler().sendPostRequest(baseUrl, params);
@@ -42,7 +44,7 @@ public class ApiCall extends AsyncTask<Void, HttpResponse, HttpResponse> {
         } catch (Exception x) {
             if(!disclosed) {
                 disclosed = true;
-                handler.handleError(x.getClass().getName());
+                handler.handleError(x);
                 x.printStackTrace();
             }
             return null;

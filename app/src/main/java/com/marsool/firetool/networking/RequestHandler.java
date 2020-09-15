@@ -1,8 +1,9 @@
-package com.marsool.firetool.utils.networking;
+package com.marsool.firetool.networking;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -43,21 +44,17 @@ public class RequestHandler {
         int responseCode = conn.getResponseCode();
 
         sb = new StringBuilder();
-
+        InputStream ris = null;
         if (responseCode == 200) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String response;
-            while ((response = br.readLine()) != null) {
-                sb.append(response);
-            }
+            ris = conn.getInputStream();
         } else if (responseCode == 403 || responseCode == 422) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-            String response;
-            while ((response = br.readLine()) != null) {
-                sb.append(response);
-            }
+            ris = conn.getErrorStream();
         }
-
+        BufferedReader br = new BufferedReader(new InputStreamReader(ris));
+        String response;
+        while ((response = br.readLine()) != null) {
+            sb.append(response);
+        }
         return new HttpResponse(responseCode, sb.toString());
     }
 

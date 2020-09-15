@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_background"></item>
 
-    <item>
-        <bitmap
-            android:alpha="0.1"
-            android:src="@drawable/background"
-            android:gravity="fill">
-
-        </bitmap>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/overlay_light" />
+        </shape>
     </item>
 
-</layer-list >
+</layer-list>

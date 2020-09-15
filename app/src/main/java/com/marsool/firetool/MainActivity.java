@@ -16,13 +16,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.marsool.firetool.utils.networking.ApiCall;
-import com.marsool.firetool.utils.networking.Handler;
-import com.marsool.firetool.utils.networking.HttpResponse;
-import com.marsool.firetool.utils.networking.Param;
-import com.marsool.firetool.utils.networking.URLs;
+import com.marsool.firetool.networking.ApiCall;
+import com.marsool.firetool.networking.Handler;
+import com.marsool.firetool.networking.HttpResponse;
+import com.marsool.firetool.networking.Param;
+
+import java.net.UnknownHostException;
 
 public class MainActivity extends Activity {
     //login views
@@ -149,23 +149,28 @@ public class MainActivity extends Activity {
         hideError();
         loading();
 
-        ApiCall loginCall = new ApiCall(URLs.LOGIN,
+        ApiCall loginCall = new ApiCall(getString(R.string.api_base) + "login",
                 new Handler() {
                     @Override
                     public void handleResponse(HttpResponse response) {
-                        if(response.getCode() == 403) {
+                        if (response.getCode() == 403) {
                             showError("You're already logged somewhere else");
-                        }else if(response.getCode() == 422) {
+                        } else if (response.getCode() == 422) {
                             showError("Incorrect phone and/or password");
+                        } else if (response.getCode() == 200) {
+                            SharedPrefManager spm = SharedPrefManager.getInstance(MainActivity.this);
+                            spm.storeToken(response.getBody());
                         }
                         loaded();
                     }
 
                     @Override
-                    public void handleError(String text) {
-                        runOnUiThread(()-> {
-                            showError(text);
-                            loaded();
+                    public void handleError(Exception x) {
+                        runOnUiThread(() -> {
+                            if(x instanceof UnknownHostException) {
+                                Intent intent = new Intent(MainActivity.this, NoInternet.class);
+                                startActivity(intent);
+                            }
                         });
                     }
                 },
