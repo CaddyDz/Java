@@ -1,13 +1,12 @@
 package com.marsool.firetool.networking;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
+import android.os.Looper;
 
-import com.marsool.firetool.MainActivity;
-import com.marsool.firetool.NoInternet;
+import com.marsool.firetool.R;
+import com.marsool.firetool.SharedPrefManager;
 
 public class ConnectivityCheck {
     private Context ctx;
@@ -32,17 +31,38 @@ public class ConnectivityCheck {
                         @Override
                         public void handleResponse(HttpResponse text) {
                             onProgress.onProgess(100);
-                            onSuccess.run();
+
+                            String pending_logout = SharedPrefManager.getInstance(ctx).getPendingLogout();
+                            if (pending_logout != null) {
+                                ApiCall logout = new ApiCall(ctx.getString(R.string.api_base) + "logout",
+                                        new Handler() {
+                                            @Override
+                                            public void handleResponse(HttpResponse text) {
+                                                SharedPrefManager.getInstance(ctx).deletePendingLogout();
+                                                new android.os.Handler((Looper.getMainLooper())).post(onSuccess);
+                                            }
+
+                                            @Override
+                                            public void handleError(Exception x) {
+
+                                            }
+                                        });
+                                logout.addHeader("Authorization", "Bearer " + pending_logout);
+                                logout.execute();
+                            }else{
+                                new android.os.Handler((Looper.getMainLooper())).post(onSuccess);
+                            }
                         }
+
                         @Override
                         public void handleError(Exception x) {
-                            onFail.run();
+                            new android.os.Handler((Looper.getMainLooper())).post(onFail);
                         }
                     });
                     test.setTimeout(4000);
                     test.execute();
                 } else {
-                    onFail.run();
+                    new android.os.Handler((Looper.getMainLooper())).post(onFail);
                 }
             }
         }.start();

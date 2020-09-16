@@ -15,6 +15,7 @@ public class SharedPrefManager {
     //the constants
     private static final String SHARED_PREF_NAME = "marsool.firetool.sharedPref";
     private static final String KEY_TOKEN = "user_token";
+    private static final String PENDING_LOGOUT = "pending_logout";
 
     private static SharedPrefManager mInstance;
     private static Context mCtx;
@@ -31,12 +32,36 @@ public class SharedPrefManager {
     }
 
     //method to let the user login
-    //this method will store the user data in shared preferences
+    //this method will store the user token in shared preferences
     public void storeToken(String token) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_TOKEN, token);
         editor.apply();
+    }
+
+    //method to let the user logout when he's offline
+    //this method will store the user token in shared preferences to revoke it when the phone is connected
+    public void storePendingLogout() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PENDING_LOGOUT, getToken());
+        editor.remove(KEY_TOKEN);
+        editor.apply();
+    }
+
+    //delete pending logout token after it was revoked from the server
+    public void deletePendingLogout() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(PENDING_LOGOUT);
+        editor.apply();
+    }
+
+    //get token that is pending logout (if present)
+    public String getPendingLogout() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(PENDING_LOGOUT, null);
     }
 
     //this method will checker whether user is already logged in or not
