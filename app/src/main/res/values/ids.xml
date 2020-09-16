@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="pop_cont" />
+    <item type="id" name="pop_overlay" />
+    <item type="id" name="pop_root" />
+    <item type="id" name="pop_top" />
+    <item type="id" name="pop_back" />
+    <item type="id" name="pop_title" />
+    <item type="id" name="pop_sep" />
+</resources>

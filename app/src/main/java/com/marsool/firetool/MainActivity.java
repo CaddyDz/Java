@@ -1,7 +1,6 @@
 package com.marsool.firetool;
 
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -10,12 +9,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.marsool.firetool.networking.ApiCall;
 import com.marsool.firetool.networking.Handler;
@@ -24,7 +23,7 @@ import com.marsool.firetool.networking.Param;
 
 import java.net.UnknownHostException;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private SharedPrefManager spm;
 
     //login views
@@ -32,19 +31,8 @@ public class MainActivity extends Activity {
     private Button login;
     private ProgressBar buttonLoading;
     private TextView message;
-    //popup Views
-    private View overlay;
-    private View popup;
-    private View popupTit;
-    private View popupTop;
-    private View popupSep;
-    private View popupBack;
-    private View popupLoading;
-    private boolean popupOpen = false;
-    private int loadedPopup = -1;
     private int animDur = 300;
-    private int popup_size;
-    private int popup_padding;
+    //popup Views
 
     private boolean ignoreChange = false;
 
@@ -53,18 +41,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Settings.st = false;
-        //initialize popup fields
-        popup_size = (int) getResources().getDimension(R.dimen.popup_size);
-        popup_padding = (int) getResources().getDimension(R.dimen.popup_padding);
-        overlay = findViewById(R.id.overlay);
-        popupTit = findViewById(R.id.popup_tit);
-        popupTop = findViewById(R.id.popup_top);
-        popupSep = findViewById(R.id.popup_sep);
-        popupLoading = findViewById(R.id.popup_loading);
-        popup = findViewById(R.id.popup);
-        popupBack = findViewById(R.id.popup_back);
-        popupLoading.setClickable(false);
-        popup.setClickable(true);
 
         //initialize login fields
         editTextUsername = findViewById(R.id.editTextUsername);
@@ -82,9 +58,6 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 finish();
             } else {
-                overlay.setOnClickListener(e -> hidePopup());
-                popupBack.setOnClickListener(e -> hidePopup());
-                overlay.setClickable(false);
                 login.setOnClickListener(e -> userLogin());
             }
         } else {
@@ -108,10 +81,9 @@ public class MainActivity extends Activity {
                     return;
                 }
                 int caretPos = editTextUsername.getSelectionStart();
-                CharSequence text = charSequence;
                 StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < text.length(); i++) {
-                    char c = text.charAt(i);
+                for (int i = 0; i < charSequence.length(); i++) {
+                    char c = charSequence.charAt(i);
                     if ((i == 0 && (Character.isDigit(c) || c == '+')) || (i > 0 && Character.isDigit(c))) {
                         sb.append(c);
                     }
@@ -193,30 +165,9 @@ public class MainActivity extends Activity {
     }
 
     public void onBackPressed() {
-        if (popupOpen) {
-            hidePopup();
-            return;
-        }
         finish();
         startActivity(getIntent());
         super.onBackPressed();
-    }
-
-    public void loadPopupContent(View v, String title, int id) {
-        if (loadedPopup == id) {
-            return;
-        }
-        ((LinearLayout) popup).removeAllViews();
-        ((TextView) popupTit).setText(title);
-        ((LinearLayout) popup).addView(popupTop);
-        ((LinearLayout) popup).addView(popupSep);
-        ((LinearLayout) popup).addView(popupLoading);
-
-
-        ((LinearLayout) popup).removeView(popupLoading);
-        ((LinearLayout) popup).addView(v);
-        loadedPopup = id;
-
     }
 
     public void showError(String error) {
@@ -250,27 +201,5 @@ public class MainActivity extends Activity {
 
         button_show.start();
         loading_hide.start();
-    }
-
-    public void showPopup() {
-        ObjectAnimator fade_animation = ObjectAnimator.ofFloat(overlay, "alpha", .5f);
-        fade_animation.setDuration(animDur);
-        ObjectAnimator slide_animation = ObjectAnimator.ofFloat(popup, "translationY", 0f);
-        slide_animation.setDuration(animDur);
-        popupOpen = true;
-        overlay.setClickable(true);
-        slide_animation.start();
-        fade_animation.start();
-    }
-
-    public void hidePopup() {
-        ObjectAnimator fade_animation = ObjectAnimator.ofFloat(overlay, "alpha", 0f);
-        fade_animation.setDuration(animDur);
-        ObjectAnimator slide_animation = ObjectAnimator.ofFloat(popup, "translationY", popup_size);
-        slide_animation.setDuration(animDur);
-        popupOpen = false;
-        overlay.setClickable(false);
-        slide_animation.start();
-        fade_animation.start();
     }
 }
