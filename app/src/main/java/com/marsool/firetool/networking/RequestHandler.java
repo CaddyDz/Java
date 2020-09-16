@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,6 @@ public class RequestHandler {
     //in the hashmap we have the data to be sent to the server in keyvalue pairs
     public HttpResponse sendPostRequest(String requestURL, HashMap<String, String> header, HashMap<String, String> postDataParams) throws IOException {
         URL url;
-        StringBuilder sb = new StringBuilder();
         url = new URL(requestURL);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
@@ -38,7 +38,7 @@ public class RequestHandler {
         OutputStream os = conn.getOutputStream();
 
         BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(os, "UTF-8"));
+                new OutputStreamWriter(os, StandardCharsets.UTF_8));
         writer.write(getPostDataString(postDataParams));
 
         writer.flush();
@@ -46,7 +46,7 @@ public class RequestHandler {
         os.close();
         int responseCode = conn.getResponseCode();
 
-        sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         InputStream ris = null;
         if (responseCode == 200) {
             ris = conn.getInputStream();
@@ -62,7 +62,6 @@ public class RequestHandler {
         }
         return new HttpResponse(responseCode, sb.toString());
     }
-
 
     //this method is converting keyvalue pairs data into a query string as needed to send to the server
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {

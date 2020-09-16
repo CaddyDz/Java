@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ac0404</color>
-    <color name="colorPrimaryDark">#ac0404</color>
-    <color name="colorAccent">#ac0404</color>
-    <color name="red">#ac0404</color>
-    <color name="accent">@color/red</color>
+    <color name="main">#ac0404</color>
+    <color name="darker">#710101</color>
+    <color name="colorPrimary">@color/main</color>
+    <color name="colorPrimaryDark">@color/main</color>
+    <color name="colorAccent">@color/main</color>
+    <color name="red">@color/main</color>
+    <color name="dark_red">@color/darker</color>
+    <color name="accent">@color/main</color>
     <color name="overlay_light">#ddffffff</color>
     <color name="app_back">#ffffffff</color>
     <color name="input_back">#88dddddd</color>

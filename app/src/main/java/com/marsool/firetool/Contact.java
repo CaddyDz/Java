@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -20,43 +19,31 @@ public class Contact extends AppCompatActivity {
         setContentView(R.layout.contact);
         ImageButton facebook=(ImageButton) findViewById(R.id.facebook);
         ImageButton what=(ImageButton) findViewById(R.id.whatsapp);
-        facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(getApplicationContext());
-                facebookIntent.setData(Uri.parse(facebookUrl));
-                startActivity(facebookIntent);
-            }
+        facebook.setOnClickListener(v -> {
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            String facebookUrl = getFacebookPageURL(getApplicationContext());
+            facebookIntent.setData(Uri.parse(facebookUrl));
+            startActivity(facebookIntent);
         });
         TextView f=(TextView) findViewById(R.id.f);
-        f.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(getApplicationContext());
-                facebookIntent.setData(Uri.parse(facebookUrl));
-                startActivity(facebookIntent);
-            }
+        f.setOnClickListener(v -> {
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+            String facebookUrl = getFacebookPageURL(getApplicationContext());
+            facebookIntent.setData(Uri.parse(facebookUrl));
+            startActivity(facebookIntent);
         });
-        what.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=+201554489687";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
+        what.setOnClickListener(v -> {
+            String url = "https://api.whatsapp.com/send?phone=+201554489687";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         });
         TextView w=(TextView) findViewById(R.id.w);
-        w.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=+201554489687";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
+        w.setOnClickListener(v -> {
+            String url = "https://api.whatsapp.com/send?phone=+201554489687";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         });
     }
     public String getFacebookPageURL(Context context) {
