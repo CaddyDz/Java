@@ -7,13 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.marsool.firetool.networking.ApiCall;
 import com.marsool.firetool.networking.Handler;
 import com.marsool.firetool.networking.HttpResponse;
+import com.marsool.firetool.ui.Loading;
+import com.marsool.firetool.ui.alerts.Alert;
+import com.marsool.firetool.ui.alerts.AlertType;
+import com.marsool.firetool.ui.alerts.ButtonType;
 
 
 public class Settings extends AppCompatActivity {
@@ -50,26 +53,35 @@ public class Settings extends AppCompatActivity {
             }
         });
         TextView out = findViewById(R.id.logout);
-        out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ApiCall logout = new ApiCall(getString(R.string.api_base) + "logout",
-                        new Handler() {
-                            @Override
-                            public void handleResponse(HttpResponse text) {
-                                SharedPrefManager.logout();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            }
+        out.setOnClickListener(e -> {
+            Alert confirm = new Alert(Settings.this, AlertType.CONFIRM);
+            confirm.setTitle("Logout");
+            confirm.setMessage("Are you sure you wanna log out?");
+            confirm.showAndWait(findViewById(R.id.root), res -> {
+                if (res == ButtonType.YES) {
+                    Loading loading = new Loading(Settings.this);
+                    loading.setTitle("Logout");
+                    loading.setMessage("Logging you out...");
+                    loading.show(findViewById(R.id.root));
+                    ApiCall logout = new ApiCall(getString(R.string.api_base) + "logout",
+                            new Handler() {
+                                @Override
+                                public void handleResponse(HttpResponse text) {
+                                    loading.hide();
+                                    SharedPrefManager.logout();
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                }
 
-                            @Override
-                            public void handleError(Exception x) {
+                                @Override
+                                public void handleError(Exception x) {
 
-                            }
-                        });
-                logout.addHeader("Authorization","Bearer " + spm.getToken());
-                logout.execute();
-            }
+                                }
+                            });
+                    logout.addHeader("Authorization", "Bearer " + spm.getToken());
+                    logout.execute();
+                }
+            });
         });
         final Switch start = findViewById(R.id.start);
         start.setClickable(GlobalActionBarService.on);

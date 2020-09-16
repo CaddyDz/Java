@@ -66,7 +66,6 @@ public class GlobalActionBarService extends AccessibilityService {
         stop();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         setServiceInfo();

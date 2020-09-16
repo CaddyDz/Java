@@ -1,19 +1,19 @@
-package com.marsool.firetool;
+package com.marsool.firetool.ui;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
+
+import com.marsool.firetool.R;
 
 public class Popup extends FrameLayout {
     static int popupPadding = -1;
@@ -24,13 +24,15 @@ public class Popup extends FrameLayout {
     private LinearLayout popup;
     private TextView title;
     private int popupSize;
+    private FrameLayout content;
 
     public Popup(Context ctx, int popupSizeInDp) {
         super(ctx);
+        setLayoutDirection(LAYOUT_DIRECTION_LTR);
         if (popupPadding == -1) {
             popupPadding = (int) getResources().getDimension(R.dimen.popup_padding);
         }
-        this.popupSize = dpToPx(popupSizeInDp);
+        this.popupSize = Gutils.dpToPx(popupSizeInDp,ctx);
         setId(R.id.pop_cont);
         setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
@@ -40,7 +42,6 @@ public class Popup extends FrameLayout {
         overlay.setAlpha(0f);
         overlay.setBackgroundColor(Color.BLACK);
         overlay.setClickable(false);
-        overlay.setOnClickListener(e -> hide());
 
         popup = new LinearLayout(ctx);
         popup.setId(R.id.pop_root);
@@ -48,6 +49,7 @@ public class Popup extends FrameLayout {
         popup.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.popup_back, null));
         popup.setOrientation(LinearLayout.VERTICAL);
         popup.setTranslationY(getScreenSize().getHeight());
+        popup.setClickable(true);
 
         LinearLayout top = new LinearLayout(ctx);
         top.setId(R.id.pop_top);
@@ -56,21 +58,11 @@ public class Popup extends FrameLayout {
         top.setOrientation(LinearLayout.HORIZONTAL);
         top.setPadding(popupPadding, popupPadding, popupPadding, popupPadding);
 
-        Button back = new Button(ctx);
-        back.setId(R.id.pop_back);
-        back.setLayoutParams(new LayoutParams(dpToPx(80), LayoutParams.WRAP_CONTENT));
-        back.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.back_back, null));
-        back.setGravity(Gravity.CENTER);
-        back.setText(R.string.back);
-        back.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-        back.setTransformationMethod(null);
-        back.setOnClickListener(e -> hide());
-
         title = new TextView(ctx);
         title.setId(R.id.pop_title);
         title.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         title.setLetterSpacing(.1f);
-        int titlePadding = dpToPx(14);
+        int titlePadding = Gutils.dpToPx(14,ctx);
         title.setPadding(titlePadding, titlePadding, titlePadding, titlePadding);
         title.setTextAlignment(TEXT_ALIGNMENT_TEXT_END);
         title.setTextColor(Color.BLACK);
@@ -78,32 +70,35 @@ public class Popup extends FrameLayout {
 
         View sep = new View(ctx);
         sep.setId(R.id.pop_sep);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, dpToPx(1));
-        params.leftMargin = dpToPx(20);
-        params.rightMargin = dpToPx(20);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, Gutils.dpToPx(1,ctx));
+        params.leftMargin = Gutils.dpToPx(20,ctx);
+        params.rightMargin = Gutils.dpToPx(20,ctx);
         sep.setLayoutParams(params);
         sep.setBackgroundColor(Color.rgb(100, 100, 100));
 
-        top.addView(back);
+        content = new FrameLayout(ctx);
+
         top.addView(title);
         popup.addView(top);
         popup.addView(sep);
+        popup.addView(content);
         addView(overlay);
         addView(popup);
     }
 
-    public void setTitle(String tit) {
+    public void loadContent(View v, String tit) {
+        content.removeAllViews();
+        title.setText(tit);
+        content.addView(v);
+    }
+
+    public void loadContent(String tit) {
         title.setText(tit);
     }
 
-    private int dpToPx(float dp) {
-        Resources r = getResources();
-        float px = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                dp,
-                r.getDisplayMetrics()
-        );
-        return (int) px;
+    public void loadContent(View v) {
+        content.removeAllViews();
+        content.addView(v);
     }
 
     public void show() {
