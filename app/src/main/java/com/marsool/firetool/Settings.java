@@ -18,6 +18,8 @@ import com.marsool.firetool.ui.alerts.ButtonType;
 
 
 public class Settings extends AppCompatActivity {
+    static private final String sharedPrefName = "firetoolapp";
+
     public static Boolean a;
     public static Boolean b;
     public static Boolean c;
@@ -30,7 +32,7 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
         spm = SharedPrefManager.getInstance(this);
         TextView contact = findViewById(R.id.contact);
         contact.setOnClickListener(v -> {
@@ -94,7 +96,7 @@ public class Settings extends AppCompatActivity {
 
         final Switch update = (Switch) findViewById(R.id.switch1);
         update.setOnClickListener(v -> {
-            SharedPreferences pref1 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences pref1 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
             SharedPreferences.Editor editor = pref1.edit();
             editor.putBoolean("a", update.isChecked());
             editor.commit();
@@ -102,7 +104,7 @@ public class Settings extends AppCompatActivity {
         });
         final Switch skip = (Switch) findViewById(R.id.switch2);
         skip.setOnClickListener(v -> {
-            SharedPreferences pref14 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences pref14 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
             SharedPreferences.Editor editor = pref14.edit();
             editor.putBoolean("b", skip.isChecked());
             editor.commit();
@@ -115,14 +117,14 @@ public class Settings extends AppCompatActivity {
 
         final Switch send = (Switch) findViewById(R.id.switch5);
         send.setOnClickListener(v -> {
-            SharedPreferences pref13 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences pref13 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
             SharedPreferences.Editor editor = pref13.edit();
             editor.putBoolean("d", send.isChecked());
             editor.commit();
             d = pref13.getBoolean("d", true);
         });
         write.setOnClickListener(v -> {
-            SharedPreferences pref12 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences pref12 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
             SharedPreferences.Editor editor = pref12.edit();
             editor.putBoolean("c", write.isChecked());
             if (!write.isChecked()) {
