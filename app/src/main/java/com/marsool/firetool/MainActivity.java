@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean ignoreChange = false;
 
+    private boolean connectivityCheckSkipped = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         login = findViewById(R.id.buttonLogin);
+        login.setOnClickListener(e -> userLogin());
         buttonLoading = findViewById(R.id.button_loading);
         message = findViewById(R.id.message);
         content = findViewById(R.id.content);
@@ -77,17 +80,25 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            login.setOnClickListener(e -> userLogin());
+            boolean skip = false;
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                skip = extras.getBoolean("skip_connect");
+            }
+            connectivityCheckSkipped = skip;
+            if (!skip) {
+                ConnectivityCheck connectivityCheck = new ConnectivityCheck(this,
+                        e -> conProg.setProgress(e),
+                        () -> hideConnect(),
+                        () -> {
+                            Intent intent = new Intent(MainActivity.this, NoInternet.class);
+                            startActivity(intent);
+                        });
+                connectivityCheck.execute();
+            } else {
+                hideConnect();
+            }
         }
-
-        ConnectivityCheck connectivityCheck = new ConnectivityCheck(this,
-                e -> runOnUiThread(() -> conProg.setProgress(e)),
-                () -> runOnUiThread(this::hideConnect),
-                () -> {
-                    Intent intent = new Intent(MainActivity.this, NoInternet.class);
-                    startActivity(intent);
-                });
-        connectivityCheck.execute();
     }
 
     //adding event listener on the phone number to emphasise the rules
@@ -177,7 +188,14 @@ public class MainActivity extends AppCompatActivity {
                 new Param("phone", username),
                 new Param("password", password),
                 new Param("device_name", "test"));
-        loginCall.execute();
+        if(connectivityCheckSkipped) {
+            new ConnectivityCheck(this, e-> {}, ()-> loginCall.execute(),()->{
+                Intent intent = new Intent(MainActivity.this, NoInternet.class);
+                startActivity(intent);
+            }).execute();
+        }else {
+            loginCall.execute();
+        }
     }
 
     public void onBackPressed() {

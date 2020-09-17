@@ -3,8 +3,6 @@ package com.marsool.firetool;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -20,37 +18,31 @@ import com.marsool.firetool.ui.alerts.ButtonType;
 
 
 public class Settings extends AppCompatActivity {
+    static private final String sharedPrefName = "firetoolapp";
+
     public static Boolean a;
     public static Boolean b;
     public static Boolean c;
     public static Boolean d;
-    Button contact, out;
     public static boolean st = true;
 
-    private String token;
     private SharedPrefManager spm;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
         spm = SharedPrefManager.getInstance(this);
         TextView contact = findViewById(R.id.contact);
-        contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Contact.class);
-                startActivity(intent);
-            }
+        contact.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), Contact.class);
+            startActivity(intent);
         });
         contact = findViewById(R.id.contact);
-        contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Contact.class);
-                startActivity(intent);
-            }
+        contact.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), Contact.class);
+            startActivity(intent);
         });
         TextView out = findViewById(R.id.logout);
         out.setOnClickListener(e -> {
@@ -75,7 +67,16 @@ public class Settings extends AppCompatActivity {
 
                                 @Override
                                 public void handleError(Exception x) {
-
+                                    //STORE PENDING LOGOUT
+                                    runOnUiThread(()-> {
+                                        loading.hide();
+                                        SharedPrefManager.getInstance(Settings.this).storePendingLogout();
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        Bundle b = new Bundle();
+                                        b.putBoolean("skip_connect",true);
+                                        intent.putExtras(b);
+                                        startActivity(intent);
+                                    });
                                 }
                             });
                     logout.addHeader("Authorization", "Bearer " + spm.getToken());
@@ -90,36 +91,24 @@ public class Settings extends AppCompatActivity {
             start.setChecked(false);
         } else {
             start.setClickable(true);
-
-            start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    st = !st;
-                }
-            });
+            start.setOnClickListener(v -> st = !st);
         }
 
         final Switch update = (Switch) findViewById(R.id.switch1);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("a", update.isChecked());
-                editor.commit();
+        update.setOnClickListener(v -> {
+            SharedPreferences pref1 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref1.edit();
+            editor.putBoolean("a", update.isChecked());
+            editor.commit();
 
-            }
         });
         final Switch skip = (Switch) findViewById(R.id.switch2);
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("b", skip.isChecked());
-                editor.commit();
-                b = pref.getBoolean("b", true);
-            }
+        skip.setOnClickListener(v -> {
+            SharedPreferences pref14 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref14.edit();
+            editor.putBoolean("b", skip.isChecked());
+            editor.commit();
+            b = pref14.getBoolean("b", true);
         });
         Switch skip2 = (Switch) findViewById(R.id.switch3);
         skip2.setClickable(false);
@@ -127,33 +116,27 @@ public class Settings extends AppCompatActivity {
         final Switch write = (Switch) findViewById(R.id.switch4);
 
         final Switch send = (Switch) findViewById(R.id.switch5);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("d", send.isChecked());
-                editor.commit();
-                d = pref.getBoolean("d", true);
-            }
+        send.setOnClickListener(v -> {
+            SharedPreferences pref13 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref13.edit();
+            editor.putBoolean("d", send.isChecked());
+            editor.commit();
+            d = pref13.getBoolean("d", true);
         });
-        write.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("c", write.isChecked());
-                if (!write.isChecked()) {
-                    editor.putBoolean("d", false);
-                    send.setClickable(false);
-                    send.setChecked(false);
-                } else {
-                    send.setClickable(true);
+        write.setOnClickListener(v -> {
+            SharedPreferences pref12 = getApplicationContext().getSharedPreferences(sharedPrefName, 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref12.edit();
+            editor.putBoolean("c", write.isChecked());
+            if (!write.isChecked()) {
+                editor.putBoolean("d", false);
+                send.setClickable(false);
+                send.setChecked(false);
+            } else {
+                send.setClickable(true);
 
-                }
-                editor.commit();
-                c = pref.getBoolean("c", true);
             }
+            editor.commit();
+            c = pref12.getBoolean("c", true);
         });
         a = pref.getBoolean("a", true);
         b = pref.getBoolean("b", true);

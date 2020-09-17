@@ -15,30 +15,32 @@ public class NoInternet extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.no_internet);
-        Settings.st=false;
+        Settings.st = false;
 
-        findViewById(R.id.reconnect).setOnClickListener(e-> {
+        findViewById(R.id.reconnect).setOnClickListener(e -> {
             Loading recon = new Loading(this);
             recon.setTitle("Reconnect");
             recon.setMessage("Trying to reconnect");
             recon.show(findViewById(R.id.root));
 
-            ConnectivityCheck check = new ConnectivityCheck(this,p->{},
-                    ()-> runOnUiThread(()-> {
+            ConnectivityCheck check = new ConnectivityCheck(this, p -> {
+            },
+                    () -> {
                         Intent intent = new Intent(NoInternet.this, MainActivity.class);
                         startActivity(intent);
-                    }),
-                    ()-> runOnUiThread(()-> {
+                    },
+                    () -> {
                         recon.hide();
                         Alert failed = new Alert(NoInternet.this, AlertType.INFORMATION);
                         failed.setTitle("Reconnect");
                         failed.setMessage("You're not connected!");
                         failed.showAndWait(findViewById(R.id.root), r -> {
                         });
-                    }));
+                    });
             check.execute();
         });
     }
+
     public void onBackPressed() {
         finish();
         startActivity(getIntent());
