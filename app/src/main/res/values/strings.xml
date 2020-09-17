@@ -1,5 +1,5 @@
 <resources>
-    <string name="api_base" translatable="false">http://firetool.sitando.com/api/</string>
+    <string name="api_base" translatable="false">https://firetool.sitando.com/api/</string>
     <string name="app_name" translatable="false">Fire Tool</string>
     <string name="app_slogon" translatable="false">Work quickly and easily</string>
     <string name="logo_description">شعار التطبيق</string>
