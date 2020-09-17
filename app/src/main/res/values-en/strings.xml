@@ -1,0 +1,16 @@
+<resources>
+    <string name="logo_description">App Main Logo</string>
+    <string name="phone_field">Phone Number</string>
+    <string name="password_field">Password</string>
+    <string name="submit">Login</string>
+    <string name="back">Back</string>
+    <string name="ok">Ok</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="layout_direction">ltr</string>
+    <string name="incorrect_credentials">Incorrect phone number and/or password</string>
+    <string name="already_logged">You\'re already logged somewhere else</string>
+    <string name="enter_phone">Please enter your phone number</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="about">About</string>
+</resources>
