@@ -1,14 +1,19 @@
 <resources>
-    <string name="api_base">https://lukas.sitando.com/api/</string>
-    <string name="app_name">Fire Tool</string>
-    <string name="app_slogon">Work quickly and easily</string>
-    <string name="logo_description">App Main Logo</string>
-    <string name="phone_field">Phone Number</string>
-    <string name="password_field">Password</string>
-    <string name="submit">Submit</string>
-    <string name="back">Back</string>
-    <string name="ok">Ok</string>
-    <string name="yes">Yes</string>
-    <string name="cancel">Cancel</string>
-    <string name="connecting">Checking connection...</string>
+    <string name="api_base" translatable="false">https://firetool.sitando.com/api/</string>
+    <string name="app_name" translatable="false">Fire Tool</string>
+    <string name="app_slogon" translatable="false">Work quickly and easily</string>
+    <string name="logo_description">شعار التطبيق</string>
+    <string name="phone_field">رقم الهاتف</string>
+    <string name="password_field">كلمة المرور</string>
+    <string name="submit">تسجيل الدخول</string>
+    <string name="back">رجوع</string>
+    <string name="ok">إغلاق</string>
+    <string name="yes">نعم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="layout_direction">rtl</string>
+    <string name="incorrect_credentials">رقم الهاتف و / أو كلمة المرور غير صحيحة</string>
+    <string name="already_logged">الحساب مفتوح في مكان آخر</string>
+    <string name="enter_phone">يرجى إدخال رقم الهاتف</string>
+    <string name="enter_password">يرجى إدخال كلمة المرور</string>
+    <string name="about">حول التطبيق</string>
 </resources>

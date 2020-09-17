@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.LayoutDirection;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Settings.st = false;
+        String layoutDir = getResources().getString(R.string.layout_direction);
+        System.out.println(layoutDir);
+        int dir = -1;
+        switch(layoutDir) {
+            case "ltr": dir = LayoutDirection.LTR; break;
+            case "rtl": dir = LayoutDirection.RTL; break;
+        }
+        findViewById(R.id.root).setLayoutDirection(dir);
+
         //initialize login fields
         conRoot = findViewById(R.id.connect);
         conProg = findViewById(R.id.connect_progress);
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         View info = findViewById(R.id.info);
         info.setOnClickListener(e -> {
             Alert inf = new Alert(this, AlertType.INFORMATION);
-            inf.setTitle("About");
+            inf.setTitle(getResources().getString(R.string.about));
             inf.setMessage("FireTool© v" + BuildConfig.VERSION_NAME);
             inf.showAndWait(findViewById(R.id.root), f -> {
                 //HIDE
@@ -143,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         //validating inputs
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your phone number");
+            editTextUsername.setError(getResources().getString(R.string.enter_phone));
             editTextUsername.requestFocus();
             return;
         }
@@ -163,9 +173,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void handleResponse(HttpResponse response) {
                         if (response.getCode() == 403) {
-                            showError("You're already logged " + (spm.isLoggedIn() ? "here" : "somewhere else"));
+                            showError(getResources().getString(R.string.already_logged));
                         } else if (response.getCode() == 422) {
-                            showError("Incorrect phone and/or password");
+                            showError(getResources().getString(R.string.incorrect_credentials));
                         } else if (response.getCode() == 200) {
                             spm.storeToken(response.getBody());
                             Intent intent = new Intent(MainActivity.this, Settings.class);
@@ -206,9 +216,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideConnect() {
         ObjectAnimator connectHide = ObjectAnimator.ofFloat(conRoot, "alpha", 0f);
-        connectHide.setDuration(animDur);
+        connectHide.setDuration(500);
         ObjectAnimator contentShow = ObjectAnimator.ofFloat(content, "alpha", 1f);
-        contentShow.setDuration(animDur);
+        contentShow.setDuration(500);
         conRoot.setClickable(false);
         content.setClickable(true);
         connectHide.start();
