@@ -13,4 +13,7 @@
     <string name="enter_phone">Veuillez entrer votre numéro de téléphone</string>
     <string name="enter_password">Veuillez entrer votre mot de passe</string>
     <string name="about">À propos</string>
+    <string name="select_country">Choisissez le pays</string>
+    <string name="exit_confirm">Voulez vous vraiment quitter?</string>
+    <string name="exit">Quittez</string>
 </resources>

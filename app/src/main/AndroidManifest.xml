@@ -11,7 +11,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,11 +29,11 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/global_action_bar_service" />
         </service>
-        <activity android:name=".Settings"
+        <activity android:name=".activities.Settings"
             android:theme="@style/theme"
             android:label="الاعدادات">
         </activity>
-        <activity android:name=".NoInternet">
+        <activity android:name=".activities.NoInternet">
         </activity>
         <activity android:name=".Contact"
             android:theme="@style/theme"

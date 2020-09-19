@@ -17,7 +17,7 @@ import com.marsool.firetool.R;
 
 public class Popup extends FrameLayout {
     static int popupPadding = -1;
-    static int animDur = 300;
+    public static final int animDur = 300;
 
     private boolean open;
     private View overlay;
@@ -101,10 +101,20 @@ public class Popup extends FrameLayout {
         content.addView(v);
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        if(open) {
+            ObjectAnimator adjust = ObjectAnimator.ofFloat(popup, "translationY", h - popupSize);
+            adjust.setDuration(animDur);
+            adjust.start();
+        }
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+
     public void show() {
         ObjectAnimator fade_animation = ObjectAnimator.ofFloat(overlay, "alpha", .5f);
         fade_animation.setDuration(animDur);
-        ObjectAnimator slide_animation = ObjectAnimator.ofFloat(popup, "translationY", getScreenSize().getHeight() - popupSize);
+        ObjectAnimator slide_animation = ObjectAnimator.ofFloat(popup, "translationY", getHeight() - popupSize);
         slide_animation.setDuration(animDur);
         open = true;
         overlay.setClickable(true);

@@ -2,6 +2,10 @@
     <string name="api_base" translatable="false">https://firetool.sitando.com/api/</string>
     <string name="app_name" translatable="false">Fire Tool</string>
     <string name="app_slogon" translatable="false">Work quickly and easily</string>
+    <string-array name="one_or_two">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
     <string name="logo_description">شعار التطبيق</string>
     <string name="phone_field">رقم الهاتف</string>
     <string name="password_field">كلمة المرور</string>
@@ -16,4 +20,7 @@
     <string name="enter_phone">يرجى إدخال رقم الهاتف</string>
     <string name="enter_password">يرجى إدخال كلمة المرور</string>
     <string name="about">حول التطبيق</string>
+    <string name="select_country">إختيار البلد</string>
+    <string name="exit_confirm">هل تريد إغلاق التطبيق؟</string>
+    <string name="exit">خروج</string>
 </resources>
