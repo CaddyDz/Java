@@ -51,6 +51,10 @@ public class Loading {
         popup.show();
     }
 
+    public Popup getPopup() {
+        return popup;
+    }
+
     public void hide() {
         popup.hide();
     }

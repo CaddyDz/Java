@@ -23,7 +23,7 @@ import androidx.annotation.RequiresApi;
 import java.util.Collections;
 import java.util.List;
 
-import static com.marsool.firetool.Settings.st;
+import static com.marsool.firetool.activities.Settings.st;
 
 public class GlobalActionBarService extends AccessibilityService {
     private static final String TAG = GlobalActionBarService.class

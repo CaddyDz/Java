@@ -38,15 +38,16 @@ public class Alert {
             AlertButton button = new AlertButton(ctx, bt);
             if (i == 0) {
                 button.setLayoutParams(new FrameLayout.LayoutParams(Gutils.dpToPx(100, ctx), FrameLayout.LayoutParams.WRAP_CONTENT));
-            }else {
+            } else {
                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Gutils.dpToPx(100, ctx), FrameLayout.LayoutParams.WRAP_CONTENT);
                 params.leftMargin = Gutils.dpToPx(30, ctx);
                 button.setLayoutParams(params);
             }
             buttons.addView(button);
-            button.setOnClickListener(e-> {
+            button.setOnClickListener(e -> {
                 popup.hide();
-                handler.handle(bt);
+                if (handler != null)
+                    handler.handle(bt);
             });
         }
 
@@ -63,9 +64,19 @@ public class Alert {
         msg.setText(message);
     }
 
-    public void showAndWait(FrameLayout root, AlertResultHandler handler) {
+    public Popup getPopup() {
+        return popup;
+    }
+
+    public void setHandler(AlertResultHandler handler) {
         this.handler = handler;
-        root.addView(popup);
-        popup.show();
+    }
+
+    public void hide() {
+        popup.hide();
+    }
+
+    public boolean isShown() {
+        return popup.isOpen();
     }
 }
