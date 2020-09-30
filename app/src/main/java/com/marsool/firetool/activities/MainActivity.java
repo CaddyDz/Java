@@ -214,7 +214,7 @@ public class MainActivity extends Activity {
 
     private void userLogin() {
         //first getting the values
-        final String username = ((TextView) findViewById(R.id.country_code)).getText() + editTextUsername.getText().toString();
+        final String username = editTextUsername.getText().toString();
         final String password = editTextPassword.getText().toString();
 
         //validating inputs
@@ -238,7 +238,6 @@ public class MainActivity extends Activity {
                 new Handler() {
                     @Override
                     public void handleResponse(HttpResponse response) {
-                        Toast.makeText(MainActivity.this, response.getCode() + "", Toast.LENGTH_LONG).show();
                         if (response.getCode() == 403) {
                             showError(getResources().getString(R.string.already_logged));
                         } else if (response.getCode() == 422) {
@@ -262,7 +261,7 @@ public class MainActivity extends Activity {
                         });
                     }
                 },
-                new Param("phone", username),
+                new Param("phone", ((TextView) findViewById(R.id.country_code)).getText() + username),
                 new Param("password", password),
                 new Param("number", (String) ((Spinner) findViewById(R.id.number)).getSelectedItem()),
                 new Param("device_name", "test"));
