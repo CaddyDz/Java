@@ -3,6 +3,8 @@ package com.marsool.firetool.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -11,12 +13,17 @@ import com.marsool.firetool.GlobalActionBarService;
 import com.marsool.firetool.R;
 import com.marsool.firetool.SharedPrefManager;
 import com.marsool.firetool.networking.ApiCall;
-import com.marsool.firetool.networking.Handler;
 import com.marsool.firetool.networking.HttpResponse;
 import com.marsool.firetool.ui.Loading;
 import com.marsool.firetool.ui.alerts.Alert;
 import com.marsool.firetool.ui.alerts.AlertType;
 import com.marsool.firetool.ui.alerts.ButtonType;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.connection.ConnectionEventListener;
+import com.pusher.client.connection.ConnectionState;
+import com.pusher.client.connection.ConnectionStateChange;
 
 
 public class Settings extends Activity {
@@ -58,7 +65,7 @@ public class Settings extends Activity {
                     loading.setMessage("Logging you out...");
                     loading.show(findViewById(R.id.root));
                     ApiCall logout = new ApiCall(getString(R.string.api_base) + "logout",
-                            new Handler() {
+                            new com.marsool.firetool.networking.Handler() {
                                 @Override
                                 public void handleResponse(HttpResponse text) {
                                     loading.hide();
@@ -148,5 +155,37 @@ public class Settings extends Activity {
         skip.setChecked(b);
         write.setChecked(c);
         send.setChecked(d);
+
+        PusherOptions options = new PusherOptions();
+        options.setCluster("eu");
+        Pusher pusher = new Pusher("b57277330be0b6c4620c", options);
+        pusher.connect(new ConnectionEventListener() {
+            @Override
+            public void onConnectionStateChange(ConnectionStateChange change) {
+                if(change.getPreviousState() != ConnectionState.CONNECTED && change.getCurrentState() == ConnectionState.CONNECTED) {
+                    System.out.println("connected");
+                    Channel channel = pusher.subscribe("user-deleted");
+                    channel.bind("user.deleted", event -> {
+                        new Handler(Looper.getMainLooper()).post(()-> {
+                            Alert alert = new Alert(Settings.this, AlertType.INFORMATION);
+                            alert.setTitle("logged out");
+                            alert.setMessage("session expired");
+                            showAlert(alert, result-> {
+                                alert.hide();
+                                SharedPrefManager.logout();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            });
+                        });
+                    });
+                }
+            }
+
+            @Override
+            public void onError(String message, String code, Exception e) {
+                System.out.println("error "+ message);
+            }
+        });
+
     }
 }
